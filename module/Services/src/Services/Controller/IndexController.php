@@ -33,8 +33,8 @@ class IndexController extends AbstractActionController{
             'Content-Type' => 'application/json',)
         );
         $server = new Server();
-        $server->setClass(new \Services\Api\Service());
-        $server->setObject(new Service());
+        $server->setClass(new \Services\Api\Service($this->getServiceLocator()->get('db')));
+        $server->setObject(new Service($this->getServiceLocator()->get('db')));
         $server->registerFaultException('Services\Api\Exception');
         $server->getRequest()->setVersion(Server::VERSION_2);
         if($this->getRequest()->isGet()){
@@ -47,11 +47,11 @@ class IndexController extends AbstractActionController{
     }
     
     public function clientjsonAction(){
-        $url = 'http://dev.localhost/jsonrpc/public/jsonserver/rpc';
+        $url = 'http://flavio.localhost/pruebajsonrpc/public/jsonserver/rpc';
         $client = new ClientHttp();
         $client->setUri($url);
         $jsonrpcclient = new ClientJson($url,$client);        
-        $result = $jsonrpcclient->call('getHola',array());
+        $result = $jsonrpcclient->call('getRegistros',array(10));
         var_dump($result);
         return $this->response;
     }

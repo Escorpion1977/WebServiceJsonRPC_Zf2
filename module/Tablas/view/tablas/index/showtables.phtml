@@ -1,0 +1,49 @@
+<div class="hero-unit">
+<h2>Limit</h2>
+<p><input type="text" id="limite" name="limite" /></p>
+<p><a id="btnsend" class="btn btn-success" href="#" target="_blank">Send</a></p>
+</div>
+<script>
+$( "#btnsend" ).click(function() {
+    var obj = {};
+    var limite = $("#limite").val();
+    obj['limite']=limite;
+    var json_text = JSON.stringify(obj, null, 2);
+    var tbody ='';
+    $.ajax({
+        type:'POST',
+        dataType: "json",
+        url: '<?php echo $this->basePath('tablas'); ?>',
+        data: json_text,
+        success: function(datos){
+            
+            $.each(datos.data,function(key ,valor){
+                 tbody += '<tr><td>'+valor['nomina']+
+                        '</td><td>'+valor['division']+
+                        '</td><td>'+valor['ap_paterno']+
+                        '</td><td>'+valor['ap_materno']+
+                        '</td><td>'+valor['nombres']+
+                        '</td><td>'+valor['fecha_nacim']+
+                        '</td></tr>';
+            });
+            $('#registros tbody').html(tbody);
+        }
+    });
+    return false;
+});
+</script>
+<table class="table table-hover" id="registros">
+<thead>
+    <tr>
+        <th>nomina</th>
+        <th>division</th> 
+        <th>ap_paterno</th>
+        <th>ap_materno</th> 
+        <th>nombres</th>
+        <th>fecha_nacim</th> 
+    </tr>
+</thead>
+<tbody>    
+</tbody>
+    
+</table>  

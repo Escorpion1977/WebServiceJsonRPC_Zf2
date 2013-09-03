@@ -8,7 +8,8 @@
 return array(
     'modules' => array(
         'Application',
-        'Services'
+        'Services',
+        'Tablas'
         ),
     'module_listener_options' => array(
         'module_paths' => array(
