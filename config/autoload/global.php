@@ -20,15 +20,5 @@ return array(
             'db' => 'Zend\Db\Adapter\Adapter',
             'cache' => 'Zend\Cache\StorageFactory',
         ),
-    ),
-    'db' => array(
-        'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=prueba1;hostname=localhost',
-        'username' => 'root',
-        'password' => '',
-        'driver_options' => array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-        ),
-    ),
-           
+    ),        
 );
